@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    
     @State private var message = ""
     @State private var imageName = ""
+    @State private var imageNumber = 0
+    
+    
+    @State private var messageNumber = 0
+    
+    
     var body: some View {
         
         VStack {
@@ -17,38 +25,58 @@ struct ContentView: View {
             Spacer()
             
             
-            Image(systemName: imageName)
+            Image(imageName)
                 .resizable()
                 .scaledToFit()
-                .foregroundStyle(.orange)
-                
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .shadow(radius: 30)
             
             Text(message)
                 .font(.largeTitle)
-                .fontWeight(.ultraLight)
+                .fontWeight(.heavy)
+                .foregroundStyle(.red)
+                .multilineTextAlignment(.center)
             
             Spacer()
             
             
-            Button("Press Me!") {
-                let message1 = "You are awesome!"
-                let message2 = "You are great!"
+            Button("Show Message") {
                 
-                let imageName1 = "sun.max.fill"
-                let imageName2 = "hand.thumbsup"
+                let messages = ["You are awesome!",
+                                               "You are great!",
+                                               "You are incredible!",
+                                               "You are cool!",
+                                               "You're amazing!"]
                 
-                if message == message1 {
-                    message = message2
-                    imageName = imageName1
+                if messageNumber < messages.count - 1 {
+                    messageNumber += 1
                 }
                 else {
-                    message = message1
-                    imageName = imageName2
+                    messageNumber = 0
                 }
+                
+                message = messages[messageNumber]
+                
+//                message = (message == message1 ? message2 : message1)
+                
+                //                imageName = (imageName == imageName1 ? imageName2 : imageName1)
+
+                
+                imageName = "image\(imageNumber)"
+                
+                imageNumber += 1
+                
+                if imageNumber > 9 {
+                    imageNumber = 0
+                }
+                
+                
+                
+                
+                
             }
             .buttonStyle(.borderedProminent)
             .font(.title2)
-            .tint(.orange)
         }
         .padding()
     }
