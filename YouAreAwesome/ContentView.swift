@@ -58,6 +58,7 @@ struct ContentView: View {
                             audioPlayer.stop()
                         }
                     }
+                    
                 
                 
                 Spacer()
@@ -99,9 +100,11 @@ struct ContentView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .font(.title2)
+                
             }
         }
         .padding()
+        .tint(.accentColor)
     }
     
     func playSound(soundName: String) {
@@ -130,6 +133,11 @@ struct ContentView: View {
     }
 }
 
-#Preview {
+#Preview ("Light Mode") {
     ContentView()
+        .preferredColorScheme(.light)
+}
+#Preview ("Dark Mode") {
+    ContentView()
+        .preferredColorScheme(.dark)
 }
